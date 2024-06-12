@@ -1,6 +1,6 @@
-package com.bruno13palhano.model
+package com.bruno13palhano.model.component
 
-open class Component(
+abstract class Component(
     open val id: Long,
     open val name: String
 )
