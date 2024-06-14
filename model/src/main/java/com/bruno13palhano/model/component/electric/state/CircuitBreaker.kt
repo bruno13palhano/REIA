@@ -14,11 +14,11 @@ data class CircuitBreaker(
     val current: Float,
     val type: String
 ) : Electric(
-    id = id,
-    name = name,
-    circuit = circuit,
-    tension = tension,
-    power = power,
-    phase = phase,
-    position = position
-)
+        id = id,
+        name = name,
+        circuit = circuit,
+        tension = tension,
+        power = power,
+        phase = phase,
+        position = position
+    )

@@ -10,7 +10,7 @@ data class Switchboard(
     override val width: Float,
     override val depth: Float,
     override val position: Point,
-    val circuitBreakers: List<CircuitBreaker>,
+    val circuitBreakers: List<CircuitBreaker>
 ) : Box(
         id = id,
         name = name,
