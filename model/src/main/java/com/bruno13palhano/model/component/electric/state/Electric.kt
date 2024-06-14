@@ -8,6 +8,8 @@ abstract class Electric(
     override val id: Long,
     override val name: String,
     open val circuit: String,
+    open val tension: Float,
+    open val power: Float,
     open val phase: Phase,
-    open val position: Point,
+    open val position: Point
 ) : Component(id = id, name = name)
