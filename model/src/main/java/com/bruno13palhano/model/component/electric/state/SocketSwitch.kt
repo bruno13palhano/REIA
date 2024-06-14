@@ -3,7 +3,7 @@ package com.bruno13palhano.model.component.electric.state
 import com.bruno13palhano.model.component.Point
 import com.bruno13palhano.model.component.electric.Phase
 
-data class Socket(
+data class SocketSwitch(
     override val id: Long,
     override val name: String,
     override val circuit: String,
