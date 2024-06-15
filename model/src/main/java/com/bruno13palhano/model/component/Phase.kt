@@ -1,4 +1,4 @@
-package com.bruno13palhano.model.component.electric
+package com.bruno13palhano.model.component
 
 enum class Phase {
     SINGLE_PHASE,
