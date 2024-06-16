@@ -7,8 +7,12 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorScheme =
     darkColorScheme(
@@ -50,6 +54,19 @@ fun REIATheme(
             darkTheme -> DarkColorScheme
             else -> LightColorScheme
         }
+
+    val systemUIController = rememberSystemUiController()
+
+    SideEffect {
+        systemUIController.setSystemBarsColor(
+            color = colorScheme.background,
+            darkIcons = !darkTheme
+        )
+        systemUIController.setNavigationBarColor(
+            color = colorScheme.surfaceColorAtElevation(3.dp),
+            darkIcons = !darkTheme
+        )
+    }
 
     MaterialTheme(
         colorScheme = colorScheme,
