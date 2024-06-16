@@ -1,0 +1,32 @@
+CREATE TABLE Electric(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    workspaceId INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    circuit TEXT NOT NULL,
+    tension REAL NOT NULL,
+    current REAL NOT NULL,
+    power REAL NOT NULL,
+    phase TEXT NOT NULL,
+    positionX REAL NOT NULL,
+    positionY REAL NOT NULL
+);
+
+insert:
+INSERT INTO Electric(
+    workspaceId, name, circuit, tension, current, power, phase, positionX, positionY)
+VALUES(?,?,?,?,?,?,?,?,?);
+
+update:
+UPDATE Electric SET workspaceId = ?, name = ?,  circuit = ?, current = ?, power = ?, phase = ?,
+    positionX = ?, positionY = ? WHERE id = ?;
+
+delete:
+DELETE FROM Electric WHERE id = ?;
+
+getById:
+SELECT El.id, El.workspaceId, El.name, El.circuit, El.current, El.power, El.phase, El.positionX,
+    El.positionY FROM Electric El WHERE id = ?;
+
+getAll:
+SELECT El.id, El.workspaceId, El.name, El.circuit, El.current, El.power, El.phase, El.positionX,
+    El.positionY FROM Electric El;

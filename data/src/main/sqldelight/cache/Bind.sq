@@ -1,0 +1,32 @@
+CREATE TABLE Bind(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    workspaceId INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    startPointX REAL NOT NULL,
+    startPointY REAL NOT NULL,
+    endPointX REAL NOT NULL,
+    endPointY REAL NOT NULL,
+    diameter REAL NOT NULL,
+    length REAL NOT NULL,
+    type TEXT NOT NULL
+);
+
+insert:
+INSERT INTO Bind(workspaceId, name, startPointX, startPointY, endPointX, endPointY, diameter,
+    length, type)
+VALUES(?,?,?,?,?,?,?,?,?);
+
+update:
+UPDATE Bind SET workspaceId = ?, name = ?, startPointX = ?, startPointY = ?, endPointX = ?,
+    endPointY = ?, diameter = ?, length = ?, type = ? WHERE id = ?;
+
+delete:
+DELETE FROM Bind WHERE id = ?;
+
+getById:
+SELECT B.id, B.workspaceId, B.name, B.startPointX, B.startPointY, B.endPointX, B.endPointY,
+    B.diameter, B.length, B.type FROM Bind B WHERE id = ?;
+
+getAll:
+SELECT B.id, B.workspaceId, B.name, B.startPointX, B.startPointY, B.endPointX, B.endPointY,
+    B.diameter, B.length, B.type FROM Bind B;
