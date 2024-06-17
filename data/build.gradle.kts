@@ -1,9 +1,12 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import app.cash.sqldelight.core.capitalize
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.secrets)
     alias(libs.plugins.ktlint)
 }
@@ -23,6 +26,10 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    sourceSets {
+        getByName("main") { assets.srcDirs(files("src/main/sqldelight")) }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -33,11 +40,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.bruno13palhano.cache")
+        }
     }
 }
 
@@ -57,10 +72,15 @@ dependencies {
     implementation(libs.coroutines.extensions)
 }
 
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.bruno13palhano.cache")
+tasks.getByName("preBuild").dependsOn(":data:generateSqlDelightInterface")
+
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        afterEvaluate {
+            val variantName = variant.name.capitalize()
+            tasks.getByName<KotlinCompile>("ksp${variantName}Kotlin") {
+                setSource(tasks.getByName("generate${variantName}AppDatabaseInterface").outputs)
+            }
         }
     }
 }
