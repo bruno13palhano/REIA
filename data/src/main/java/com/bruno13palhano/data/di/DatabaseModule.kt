@@ -24,7 +24,7 @@ internal object DatabaseModule {
     ): AppDatabase {
         return DatabaseFactory(
             driverFactory = DriverFactory(context = context)
-        ).createDriver()
+        ).createDatabase()
     }
 
     @Provides
