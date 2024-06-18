@@ -48,5 +48,5 @@ internal abstract class RepositoryModule {
     @WorkspaceRep
     @Singleton
     @Binds
-    abstract fun bindWorkspaceRepository(electricRepository: DefaultWorkspaceRepository): WorkspaceRepository
+    abstract fun bindWorkspaceRepository(workspaceRepository: DefaultWorkspaceRepository): WorkspaceRepository
 }
