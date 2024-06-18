@@ -1,6 +1,6 @@
 [versions]
-accompanistPermissions = "0.32.0"
-accompanistSystemuicontroller = "0.30.1"
+accompanistPermissions = "0.34.0"
+accompanistSystemuicontroller = "0.34.0"
 agp = "8.5.0"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
@@ -11,14 +11,14 @@ lifecycleRuntimeKtx = "2.8.2"
 activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 jetbrainsKotlinJvm = "2.0.0"
-hiltAndroidCompiler = "2.49"
+hiltAndroidCompiler = "2.51.1"
 hiltCompiler = "1.2.0"
 hiltWork = "1.2.0"
 secretsGradle = "2.0.1"
 kspVersion = "2.0.0-1.0.22"
-sqlDelight = "2.0.1"
+sqlDelight = "2.0.2"
 navVersion = "2.8.0-beta03"
-serializationVersion = "1.6.3"
+serializationVersion = "1.7.0"
 ktlintVersion = "12.1.1"
 appcompat = "1.7.0"
 material = "1.12.0"
@@ -41,7 +41,6 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
-hilt-dagger = { module = "com.google.dagger:dagger-compiler", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroidCompiler" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompiler" }
