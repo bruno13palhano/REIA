@@ -16,5 +16,5 @@ object DispatchersModule {
 
     @Provides
     @Dispatcher(REIADispatchers.DEFAULT)
-    fun providesDefaultDispatcher():  CoroutineDispatcher = Dispatchers.Default
+    fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 }
