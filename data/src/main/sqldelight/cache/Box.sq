@@ -1,25 +1,30 @@
 CREATE TABLE Box(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    workspaceId INTEGER,
+    workspaceId INTEGER NOT NULL,
     name TEXT NOT NULL,
     height REAL NOT NULL,
     width REAL NOT NULL,
     depth REAL NOT NULL,
-    position REAL NOT NULL
+    positionX REAL NOT NULL,
+    positionY REAL NOT NULL
 );
 
 insert:
-INSERT INTO Box(workspaceId, name, height, width, depth, position) VALUES(?,?,?,?,?,?);
+INSERT INTO Box(workspaceId, name, height, width, depth, positionX, positionY)
+VALUES(?,?,?,?,?,?,?);
 
 update:
-UPDATE Box SET workspaceId = ?, name = ?, height = ?, width = ?, depth = ?, position = ?
+UPDATE Box SET workspaceId = ?, name = ?, height = ?, width = ?, depth = ?, positionX = ?,
+    positionY = ?
 WHERE id = ?;
 
 delete:
 DELETE FROM Box WHERE id = ?;
 
 getById:
-SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.position FROM Box B WHERE id = ?;
+SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
+FROM Box B WHERE id = ?;
 
 getAll:
-SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.position FROM Box B;
+SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
+FROM Box B;
