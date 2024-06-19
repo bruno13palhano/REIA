@@ -31,6 +31,11 @@ SELECT El.id, El.workspaceId, El.name, El.circuit, El.tension, El.current, El.po
     El.positionX, El.positionY, El.type
 FROM Electric El WHERE id = ?;
 
+getByWorkspaceId:
+SELECT El.id, El.workspaceId, El.name, El.circuit, El.tension, El.current, El.power, El.phase,
+    El.positionX, El.positionY, El.type
+FROM Electric El WHERE workspaceId = ?;
+
 getAll:
 SELECT El.id, El.workspaceId, El.name, El.circuit, El.tension, El.current, El.power, El.phase,
     El.positionX, El.positionY, El.type

@@ -25,6 +25,10 @@ getById:
 SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
 FROM Box B WHERE id = ?;
 
+getByWorkspaceId:
+SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
+FROM Box B WHERE workspaceId = ?;
+
 getAll:
 SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
 FROM Box B;

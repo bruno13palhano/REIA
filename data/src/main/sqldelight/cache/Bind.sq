@@ -27,6 +27,10 @@ getById:
 SELECT B.id, B.workspaceId, B.name, B.startPointX, B.startPointY, B.endPointX, B.endPointY,
     B.diameter, B.length, B.type FROM Bind B WHERE id = ?;
 
+getByWorkspaceId:
+SELECT B.id, B.workspaceId, B.name, B.startPointX, B.startPointY, B.endPointX, B.endPointY,
+B.diameter, B.length, B.type FROM Bind B WHERE workspaceId = ?;
+
 getAll:
 SELECT B.id, B.workspaceId, B.name, B.startPointX, B.startPointY, B.endPointX, B.endPointY,
     B.diameter, B.length, B.type FROM Bind B;
