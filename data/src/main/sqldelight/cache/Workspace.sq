@@ -1,0 +1,19 @@
+CREATE TABLE Workspace (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL
+);
+
+insert:
+INSERT INTO Workspace(id, title) VALUES(?,?);
+
+update:
+UPDATE Workspace SET title = ? WHERE id = ?;
+
+delete:
+DELETE FROM Workspace WHERE id = ?;
+
+getById:
+SELECT W.id, W.title FROM Workspace W WHERE W.id = ?;
+
+getAll:
+SELECT W.id, W.title FROM Workspace W;
