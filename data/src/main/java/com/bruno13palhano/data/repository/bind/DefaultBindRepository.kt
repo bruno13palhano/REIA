@@ -27,6 +27,10 @@ internal class DefaultBindRepository
             return localData.getById(id = id)
         }
 
+        override fun findComponentsByWorkspaceId(workspaceId: Long): Flow<List<Bind>> {
+            return localData.getByWorkspaceId(workspaceId = workspaceId)
+        }
+
         override fun findAllComponents(): Flow<List<Bind>> {
             return localData.getAll()
         }

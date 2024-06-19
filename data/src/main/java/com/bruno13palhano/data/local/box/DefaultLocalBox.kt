@@ -10,6 +10,7 @@ import com.bruno13palhano.model.component.Box
 import com.bruno13palhano.model.component.Point
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
 internal class DefaultLocalBox
@@ -48,7 +49,17 @@ internal class DefaultLocalBox
         }
 
         override fun getById(id: Long): Flow<Box> {
-            return localQueries.getById(id = id, mapper = ::mapToBox).asFlow().mapToOne(ioDispatcher)
+            return localQueries.getById(id = id, mapper = ::mapToBox)
+                .asFlow()
+                .mapToOne(ioDispatcher)
+                .catch { it.printStackTrace() }
+        }
+
+        override fun getByWorkspaceId(workspaceId: Long): Flow<List<Box>> {
+            return localQueries.getByWorkspaceId(workspaceId = workspaceId, mapper = ::mapToBox)
+                .asFlow()
+                .mapToList(ioDispatcher)
+                .catch { it.printStackTrace() }
         }
 
         override fun getAll(): Flow<List<Box>> {

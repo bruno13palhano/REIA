@@ -27,6 +27,10 @@ internal class DefaultElectricRepository
             return localData.getById(id = id)
         }
 
+        override fun findComponentsByWorkspaceId(workspaceId: Long): Flow<List<Electric>> {
+            return localData.getByWorkspaceId(workspaceId = workspaceId)
+        }
+
         override fun findAllComponents(): Flow<List<Electric>> {
             return localData.getAll()
         }

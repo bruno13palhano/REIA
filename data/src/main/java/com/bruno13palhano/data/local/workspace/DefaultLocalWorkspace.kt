@@ -9,48 +9,53 @@ import com.bruno13palhano.data.di.REIADispatchers.IO
 import com.bruno13palhano.model.Workspace
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
-internal class DefaultLocalWorkspace @Inject constructor(
-    private val localQueries: WorkspaceQueries,
-    @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher
-) : LocalWorkspace {
-    override suspend fun insert(data: Workspace) {
-        localQueries.insert(
-            id = data.id,
-            title = data.title,
+internal class DefaultLocalWorkspace
+    @Inject
+    constructor(
+        private val localQueries: WorkspaceQueries,
+        @Dispatcher(IO) private val ioDispatcher: CoroutineDispatcher
+    ) : LocalWorkspace {
+        override suspend fun insert(data: Workspace) {
+            localQueries.insert(
+                id = data.id,
+                title = data.title
+            )
+        }
+
+        override suspend fun update(data: Workspace) {
+            localQueries.update(
+                title = data.title,
+                id = data.id
+            )
+        }
+
+        override suspend fun delete(id: Long) {
+            localQueries.delete(id = id)
+        }
+
+        override fun getById(id: Long): Flow<Workspace> {
+            return localQueries.getById(id = id, mapper = ::mapToWorkspace)
+                .asFlow()
+                .mapToOne(ioDispatcher)
+                .catch { it.printStackTrace() }
+        }
+
+        override fun getAll(): Flow<List<Workspace>> {
+            return localQueries.getAll(mapper = ::mapToWorkspace)
+                .asFlow()
+                .mapToList(ioDispatcher)
+                .catch { it.printStackTrace() }
+        }
+
+        private fun mapToWorkspace(
+            id: Long,
+            title: String
+        ) = Workspace(
+            id = id,
+            title = title,
+            components = listOf()
         )
     }
-
-    override suspend fun update(data: Workspace) {
-        localQueries.update(
-            title = data.title,
-            id = data.id
-        )
-    }
-
-    override suspend fun delete(id: Long) {
-        localQueries.delete(id = id)
-    }
-
-    override fun getById(id: Long): Flow<Workspace> {
-        return localQueries.getById(id = id, mapper = ::mapToWorkspace)
-            .asFlow()
-            .mapToOne(ioDispatcher)
-    }
-
-    override fun getAll(): Flow<List<Workspace>> {
-        return localQueries.getAll(mapper = ::mapToWorkspace)
-            .asFlow()
-            .mapToList(ioDispatcher)
-    }
-
-    private fun mapToWorkspace(
-        id: Long,
-        title: String,
-    ) = Workspace(
-        id = id,
-        title = title,
-        components = listOf()
-    )
-}

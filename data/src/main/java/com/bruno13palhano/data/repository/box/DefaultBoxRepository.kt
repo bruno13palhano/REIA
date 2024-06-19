@@ -27,6 +27,10 @@ internal class DefaultBoxRepository
             return localData.getById(id = id)
         }
 
+        override fun findComponentsByWorkspaceId(workspaceId: Long): Flow<List<Box>> {
+            return localData.getByWorkspaceId(workspaceId = workspaceId)
+        }
+
         override fun findAllComponents(): Flow<List<Box>> {
             return localData.getAll()
         }

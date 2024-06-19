@@ -9,5 +9,7 @@ interface ComponentRepository<T> {
 
     fun findComponentById(id: Long): Flow<T>
 
+    fun findComponentsByWorkspaceId(workspaceId: Long): Flow<List<T>>
+
     fun findAllComponents(): Flow<List<T>>
 }
