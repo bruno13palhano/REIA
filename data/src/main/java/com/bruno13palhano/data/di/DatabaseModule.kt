@@ -4,6 +4,7 @@ import android.content.Context
 import cache.BindQueries
 import cache.BoxQueries
 import cache.ElectricQueries
+import cache.WorkspaceQueries
 import com.bruno13palhano.cache.AppDatabase
 import com.bruno13palhano.data.database.DatabaseFactory
 import com.bruno13palhano.data.database.DriverFactory
@@ -38,4 +39,8 @@ internal object DatabaseModule {
     @Provides
     @Singleton
     fun provideBindQueries(database: AppDatabase): BindQueries = database.bindQueries
+
+    @Provides
+    @Singleton
+    fun provideWorkspaceQueries(database: AppDatabase): WorkspaceQueries = database.workspaceQueries
 }
