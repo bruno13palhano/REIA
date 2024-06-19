@@ -39,8 +39,8 @@ internal class WorkspaceUseCase
             return electricRepository.findComponentById(id = id)
         }
 
-        override fun getElectricComponents(): Flow<List<Electric>> {
-            return electricRepository.findAllComponents()
+        override fun getElectricComponents(workspaceId: Long): Flow<List<Electric>> {
+            return electricRepository.findComponentsByWorkspaceId(workspaceId = workspaceId)
         }
 
         override suspend fun saveBoxComponent(component: Box) {
@@ -55,8 +55,8 @@ internal class WorkspaceUseCase
             return boxRepository.findComponentById(id = id)
         }
 
-        override fun getBoxComponents(): Flow<List<Box>> {
-            return boxRepository.findAllComponents()
+        override fun getBoxComponents(workspaceId: Long): Flow<List<Box>> {
+            return boxRepository.findComponentsByWorkspaceId(workspaceId = workspaceId)
         }
 
         override suspend fun saveBindComponent(component: Bind) {
@@ -71,7 +71,7 @@ internal class WorkspaceUseCase
             return bindRepository.findComponentById(id = id)
         }
 
-        override fun getBindComponents(): Flow<List<Bind>> {
-            return bindRepository.findAllComponents()
+        override fun getBindComponents(workspaceId: Long): Flow<List<Bind>> {
+            return bindRepository.findComponentsByWorkspaceId(workspaceId = workspaceId)
         }
     }

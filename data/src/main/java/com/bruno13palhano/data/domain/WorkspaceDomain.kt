@@ -15,7 +15,7 @@ interface WorkspaceDomain {
 
     fun getElectricComponentById(id: Long): Flow<Electric>
 
-    fun getElectricComponents(): Flow<List<Electric>>
+    fun getElectricComponents(workspaceId: Long): Flow<List<Electric>>
 
     suspend fun saveBoxComponent(component: Box)
 
@@ -23,7 +23,7 @@ interface WorkspaceDomain {
 
     fun getBoxComponentById(id: Long): Flow<Box>
 
-    fun getBoxComponents(): Flow<List<Box>>
+    fun getBoxComponents(workspaceId: Long): Flow<List<Box>>
 
     suspend fun saveBindComponent(component: Bind)
 
@@ -31,5 +31,5 @@ interface WorkspaceDomain {
 
     fun getBindComponentById(id: Long): Flow<Bind>
 
-    fun getBindComponents(): Flow<List<Bind>>
+    fun getBindComponents(workspaceId: Long): Flow<List<Bind>>
 }
