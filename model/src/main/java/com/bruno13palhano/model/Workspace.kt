@@ -6,4 +6,8 @@ data class Workspace(
     val id: Long,
     val title: String,
     val components: List<Component>
-)
+) {
+    companion object {
+        fun empty() = Workspace(0, "", emptyList())
+    }
+}
