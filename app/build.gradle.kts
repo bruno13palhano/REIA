@@ -80,6 +80,5 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.accompanist.systemuicontroller)
-    implementation(libs.accompanist.permissions)
+    implementation(libs.androidx.material.icons.extended)
 }
