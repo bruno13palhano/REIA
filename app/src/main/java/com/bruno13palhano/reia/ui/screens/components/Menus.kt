@@ -12,6 +12,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
@@ -22,7 +24,10 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -66,6 +71,51 @@ fun BottomMenu(navController: NavController) {
                     }
                 },
                 icon = { Icon(imageVector = screen.icon, contentDescription = null) }
+            )
+        }
+    }
+}
+
+@Composable
+fun ComponentsMenu(onItemClick: (name: String, type: ComponentType) -> Unit) {
+    val items =
+        listOf(
+            ComponentOptions.Box,
+            ComponentOptions.Bind,
+            ComponentOptions.Electric
+        )
+
+    var selected by remember { mutableStateOf(items[0]) }
+
+    NavigationBar {
+        items.forEach { component ->
+            var expanded by remember { mutableStateOf(false) }
+
+            NavigationBarItem(
+                label = { Text(text = stringResource(id = component.resourceId)) },
+                selected = selected == component && expanded,
+                onClick = {
+                    selected = component
+                    expanded = true
+                },
+                icon = {
+                    Icon(imageVector = component.icon, contentDescription = null)
+
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        component.subComponents.forEach { subComponentsOptions ->
+                            DropdownMenuItem(
+                                text = { Text(text = stringResource(id = subComponentsOptions.resourceId)) },
+                                onClick = {
+                                    expanded = false
+                                    onItemClick(subComponentsOptions.name, subComponentsOptions.type)
+                                }
+                            )
+                        }
+                    }
+                }
             )
         }
     }
