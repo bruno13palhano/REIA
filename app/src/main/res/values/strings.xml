@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">REIA</string>
+    <string name="electric_label">Electric</string>
+    <string name="bind_label">Bind</string>
+    <string name="box_label">Box</string>
+    <string name="plugin_label">Plugin</string>
+    <string name="socket_label">Socket</string>
+    <string name="wire_label">Wire</string>
+    <string name="conduit_label">Conduit</string>
+    <string name="junction_box_label">Junction Box</string>
+    <string name="switchboard_label">Switchboard"</string>
 </resources>
