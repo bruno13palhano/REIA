@@ -1,6 +1,6 @@
-package com.bruno13palhano.reia.ui.screens.components
+package com.bruno13palhano.model.component.types
 
 enum class ElectricComponentNames(val value: String) {
-    PLUGIN("PLUGIN"),
-    SOCKET("SOCKET")
+    PLUGIN("Plugin"),
+    SOCKET("Socket")
 }

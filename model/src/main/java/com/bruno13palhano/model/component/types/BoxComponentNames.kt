@@ -1,6 +1,6 @@
-package com.bruno13palhano.reia.ui.screens.components
+package com.bruno13palhano.model.component.types
 
 enum class BoxComponentNames(val value: String) {
-    JUNCTION_BOX("JUNCTION_BOX"),
-    SWITCHBOARD("SWITCHBOARD")
+    JUNCTION_BOX("Junction Box"),
+    SWITCHBOARD("Switchboard")
 }

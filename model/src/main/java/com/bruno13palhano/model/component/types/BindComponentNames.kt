@@ -1,6 +1,6 @@
-package com.bruno13palhano.reia.ui.screens.components
+package com.bruno13palhano.model.component.types
 
 enum class BindComponentNames(val value: String) {
-    WIRE("WIRE"),
-    CONDUIT("CONDUIT")
+    WIRE("Wire"),
+    CONDUIT("Conduit")
 }
