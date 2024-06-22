@@ -27,7 +27,8 @@ internal class DefaultLocalBox
                 width = data.width.toDouble(),
                 depth = data.depth.toDouble(),
                 positionX = data.position.x.toDouble(),
-                positionY = data.position.y.toDouble()
+                positionY = data.position.y.toDouble(),
+                type = data.type
             )
         }
 
@@ -40,6 +41,7 @@ internal class DefaultLocalBox
                 depth = data.depth.toDouble(),
                 positionX = data.position.x.toDouble(),
                 positionY = data.position.y.toDouble(),
+                type = data.type,
                 id = data.id
             )
         }
@@ -74,7 +76,8 @@ internal class DefaultLocalBox
             width: Double,
             depth: Double,
             positionX: Double,
-            positionY: Double
+            positionY: Double,
+            type: String
         ) = Box(
             id = id,
             workspaceId = workspaceId,
@@ -82,6 +85,7 @@ internal class DefaultLocalBox
             height = height.toFloat(),
             width = width.toFloat(),
             depth = depth.toFloat(),
-            position = Point(x = positionX.toFloat(), y = positionY.toFloat())
+            position = Point(x = positionX.toFloat(), y = positionY.toFloat()),
+            type = type
         )
     }

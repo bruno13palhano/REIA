@@ -7,5 +7,6 @@ data class Box(
     val height: Float,
     val width: Float,
     val depth: Float,
-    val position: Point
+    val position: Point,
+    val type: String
 ) : Component(id = id, workspaceId = workspaceId, name = name)

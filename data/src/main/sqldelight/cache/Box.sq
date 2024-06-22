@@ -6,29 +6,30 @@ CREATE TABLE Box(
     width REAL NOT NULL,
     depth REAL NOT NULL,
     positionX REAL NOT NULL,
-    positionY REAL NOT NULL
+    positionY REAL NOT NULL,
+    type TEXT NOT NULL
 );
 
 insert:
-INSERT INTO Box(workspaceId, name, height, width, depth, positionX, positionY)
-VALUES(?,?,?,?,?,?,?);
+INSERT INTO Box(workspaceId, name, height, width, depth, positionX, positionY, type)
+VALUES(?,?,?,?,?,?,?,?);
 
 update:
 UPDATE Box SET workspaceId = ?, name = ?, height = ?, width = ?, depth = ?, positionX = ?,
-    positionY = ?
+    positionY = ?, type = ?
 WHERE id = ?;
 
 delete:
 DELETE FROM Box WHERE id = ?;
 
 getById:
-SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
+SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY, B.type
 FROM Box B WHERE id = ?;
 
 getByWorkspaceId:
-SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
+SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY, B.type
 FROM Box B WHERE workspaceId = ?;
 
 getAll:
-SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY
+SELECT B.id, B.workspaceId, B.name, B.height, B.width, B.depth, B.positionX, B.positionY, B.type
 FROM Box B;
