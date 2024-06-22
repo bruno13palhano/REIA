@@ -77,7 +77,7 @@ fun BottomMenu(navController: NavController) {
 }
 
 @Composable
-fun ComponentsMenu(onItemClick: (name: String, type: ComponentType) -> Unit) {
+fun ComponentsMenu(onItemClick: (subtype: String, type: ComponentType) -> Unit) {
     val items =
         listOf(
             ComponentOptions.Box,
