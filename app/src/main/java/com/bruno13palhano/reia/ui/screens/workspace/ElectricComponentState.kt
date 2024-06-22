@@ -3,7 +3,6 @@ package com.bruno13palhano.reia.ui.screens.workspace
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.bruno13palhano.reia.ui.screens.components.ComponentType
 
 class ElectricComponentState {
     var name by mutableStateOf("")
@@ -18,7 +17,8 @@ class ElectricComponentState {
         private set
     var phase by mutableStateOf("")
         private set
-    val type = ComponentType.Electric.name
+    var type by mutableStateOf("")
+        private set
 
     fun updateName(name: String) {
         this.name = name
@@ -44,6 +44,10 @@ class ElectricComponentState {
         this.phase = phase
     }
 
+    fun updateType(type: String) {
+        this.type = type
+    }
+
     fun reset() {
         name = ""
         circuit = ""
@@ -51,5 +55,6 @@ class ElectricComponentState {
         current = ""
         power = ""
         phase = ""
+        type = ""
     }
 }

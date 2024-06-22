@@ -13,6 +13,8 @@ class BoxComponentState {
         private set
     var depth by mutableStateOf("")
         private set
+    var type by mutableStateOf("")
+        private set
 
     fun updateName(name: String) {
         this.name = name
@@ -30,10 +32,15 @@ class BoxComponentState {
         this.depth = depth
     }
 
+    fun updateType(type: String) {
+        this.type = type
+    }
+
     fun reset() {
         name = ""
         height = ""
         width = ""
         depth = ""
+        type = ""
     }
 }
