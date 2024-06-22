@@ -6,6 +6,9 @@ import androidx.compose.material.icons.filled.CheckBoxOutlineBlank
 import androidx.compose.material.icons.filled.ElectricalServices
 import androidx.compose.material.icons.filled.ShapeLine
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.bruno13palhano.model.component.types.BindComponentNames
+import com.bruno13palhano.model.component.types.BoxComponentNames
+import com.bruno13palhano.model.component.types.ElectricComponentNames
 import com.bruno13palhano.reia.R
 
 sealed class ComponentOptions(
@@ -46,7 +49,7 @@ private val electricComponents =
             resourceId = R.string.plugin_label
         ),
         SubComponentsOptions(
-            name = ElectricComponentNames.SOCKET.name,
+            name = ElectricComponentNames.SOCKET.value,
             type = ComponentType.Electric,
             resourceId = R.string.socket_label
         )
@@ -55,12 +58,12 @@ private val electricComponents =
 private val bindComponents =
     listOf(
         SubComponentsOptions(
-            name = BindComponentNames.WIRE.name,
+            name = BindComponentNames.WIRE.value,
             type = ComponentType.Bind,
             resourceId = R.string.wire_label
         ),
         SubComponentsOptions(
-            name = BindComponentNames.CONDUIT.name,
+            name = BindComponentNames.CONDUIT.value,
             type = ComponentType.Bind,
             resourceId = R.string.conduit_label
         )
@@ -69,12 +72,12 @@ private val bindComponents =
 private val boxComponents =
     listOf(
         SubComponentsOptions(
-            name = BoxComponentNames.JUNCTION_BOX.name,
+            name = BoxComponentNames.JUNCTION_BOX.value,
             type = ComponentType.Box,
             resourceId = R.string.junction_box_label
         ),
         SubComponentsOptions(
-            name = BoxComponentNames.SWITCHBOARD.name,
+            name = BoxComponentNames.SWITCHBOARD.value,
             type = ComponentType.Box,
             resourceId = R.string.switchboard_label
         )
