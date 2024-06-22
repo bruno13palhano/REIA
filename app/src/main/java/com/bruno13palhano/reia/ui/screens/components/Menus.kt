@@ -3,6 +3,7 @@ package com.bruno13palhano.reia.ui.screens.components
 import android.content.res.Configuration
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,14 +15,17 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -212,5 +216,24 @@ sealed class Screen<T : MainRoutes>(
         route = MainRoutes.Home,
         icon = Icons.Filled.Home,
         resourceId = R.string.app_name
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BottomSheet(
+    onDismissBottomSheet: () -> Unit,
+    content: @Composable (ColumnScope.() -> Unit)
+) {
+    val bottomSheetScreen = rememberModalBottomSheetState()
+
+    ModalBottomSheet(
+        modifier =
+            Modifier
+                .padding(bottom = 48.dp)
+                .fillMaxWidth(),
+        onDismissRequest = onDismissBottomSheet,
+        sheetState = bottomSheetScreen,
+        content = content
     )
 }
