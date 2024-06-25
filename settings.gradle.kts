@@ -23,3 +23,4 @@ rootProject.name = "REIA"
 include(":app")
 include(":data")
 include(":model")
+include(":physica_engine")
