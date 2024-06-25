@@ -18,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.bruno13palhano.reia.ui.navigation.MainNavGraph
-import com.bruno13palhano.reia.ui.screens.components.BottomMenu
 import com.bruno13palhano.reia.ui.screens.components.DrawerMenu
 import com.bruno13palhano.reia.ui.theme.REIATheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +45,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         val coroutineScope = rememberCoroutineScope()
 
-                        Scaffold(
-//                            bottomBar = { BottomMenu(navController = navController) }
-                        ) { innerPadding ->
+                        Scaffold { innerPadding ->
                             MainNavGraph(
                                 modifier = Modifier.padding(innerPadding),
                                 navController = navController,
