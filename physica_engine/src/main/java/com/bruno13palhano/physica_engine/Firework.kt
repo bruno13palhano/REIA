@@ -34,13 +34,13 @@ class FireworkRule(
     var minVelocity: Vector,
     var maxVelocity: Vector,
     var damping: Double,
-    var payloads: Array<Payload>
+    var payloads: MutableList<Payload>
 ) {
-    private var payloadCount: Int = 0
+    var payloadCount: Int = 0
 
     fun initRule(payloadCount: Int) {
         this.payloadCount = payloadCount
-        payloads[0] = Payload(0, 0)
+        payloads.add(Payload(payloadCount, payloadCount))
     }
 
     fun setParameters(
