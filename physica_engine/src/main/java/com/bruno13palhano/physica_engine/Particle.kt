@@ -2,7 +2,7 @@ package com.bruno13palhano.physica_engine
 
 import kotlin.math.pow
 
-class Particle(
+open class Particle(
     var position: Vector,
     var velocity: Vector,
     var acceleration: Vector,
