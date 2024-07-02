@@ -1,8 +1,8 @@
 package com.bruno13palhano.physica_engine
 
 class ParticleDrag(
-    val k1: Double,
-    val k2: Double
+    var k1: Double,
+    var k2: Double
 ) : ParticleForceGenerator{
     override fun updateForce(particle: Particle, duration: Double) {
         val force = Vector()
