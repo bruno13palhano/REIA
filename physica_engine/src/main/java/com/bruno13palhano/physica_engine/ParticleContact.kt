@@ -33,7 +33,24 @@ class ParticleContact(
         if (separatingVelocity > 0.0) return
 
         // Calculate the new separating velocity.
-        val newSepVelocity = -separatingVelocity * restitution
+        var newSepVelocity = -separatingVelocity * restitution
+
+        // Check the velocity build-up due to acceleration only.
+        val accCausedVelocity = particles[0]!!.getParticleAcceleration()
+        particles[1]?.let { particle ->
+            accCausedVelocity.subtract(particle.getParticleAcceleration())
+        }
+        val accCausedSepVelocity = accCausedVelocity.scalarProduct(contactNormal.scalarCopy(value = duration))
+
+        // If we've got a closing velocity due to acceleration build-up,
+        // remove it from the new separating velocity.
+        if (accCausedSepVelocity < 0.0) {
+            newSepVelocity += accCausedSepVelocity * accCausedSepVelocity
+
+            // Make sure we haven't removed more than was
+            // there to remove
+            if (newSepVelocity < 0.0) newSepVelocity = 0.0
+        }
 
         val deltaVelocity = newSepVelocity - separatingVelocity
 
