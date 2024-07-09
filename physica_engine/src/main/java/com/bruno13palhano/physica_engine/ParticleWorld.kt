@@ -6,33 +6,32 @@ package com.bruno13palhano.physica_engine
  */
 class ParticleWorld(
     var maxContacts: Int,
-    var iterations: Int = 0
-) {
+    var iterations: Int = 0,
     /**
      * Holds the list of registrations.
      */
-    var firstParticle: ParticleRegistration? = null
+    var firstParticle: ParticleRegistration? = null,
 
     /**
      * Holds the force generators for the particles in this world.
      */
-    var registry: ParticleForceRegistry? = null
+    var registry: ParticleForceRegistry? = null,
 
     /**
      * Holds the resolver for contacts.
      */
-    var resolver: ParticleContactResolver? = null
+    var resolver: ParticleContactResolver? = null,
 
     /**
      * Holds the list of contact generators.
      */
-    var firstContactGenerator: ContactGeneratorRegistration? = null
+    var firstContactGenerator: ContactGeneratorRegistration? = null,
 
     /**
      * Holds the list of contacts.
      */
     var contacts: Array<ParticleContact>? = null
-
+) {
     /**
      * Initializes the world for a simulation frame. This clears
      * the force accumulators  for particles in the world. After
