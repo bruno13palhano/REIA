@@ -1,5 +1,6 @@
 package com.bruno13palhano.physica_engine.matrix
 
+import com.bruno13palhano.physica_engine.Quaternion
 import com.bruno13palhano.physica_engine.Vector
 
 /**
@@ -118,5 +119,21 @@ class Matrix3(
         val result = Matrix3()
         result.setTranspose(this)
         return result
+    }
+
+    /**
+     * Sets this matrix to be the rotation matrix corresponding to
+     * the given quaternion.
+     */
+    fun setOrientation(quaternion: Quaternion) {
+        data[0] = 1 - (2 * quaternion.j * quaternion.j + 2 * quaternion.k * quaternion.k)
+        data[1] = 2 * quaternion.i * quaternion.j + 2 * quaternion.k * quaternion.r
+        data[2] = 2 * quaternion.i * quaternion.k - 2 * quaternion.j * quaternion.r
+        data[3] = 2 * quaternion.i * quaternion.j - 2 * quaternion.k * quaternion.r
+        data[4] = 1 - (2 * quaternion.i * quaternion.i + 2 * quaternion.k * quaternion.k)
+        data[5] = 2 * quaternion.j * quaternion.k + 2 * quaternion.i * quaternion.r
+        data[6] = 2 * quaternion.i * quaternion.k + 2 * quaternion.j * quaternion.r
+        data[7] = 2 * quaternion.j * quaternion.k - 2 * quaternion.i * quaternion.r
+        data[8] = 1 - (2 * quaternion.i * quaternion.i + 2 * quaternion.j * quaternion.j)
     }
 }

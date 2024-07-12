@@ -1,5 +1,6 @@
 package com.bruno13palhano.physica_engine.matrix
 
+import com.bruno13palhano.physica_engine.Quaternion
 import com.bruno13palhano.physica_engine.Vector
 
 /**
@@ -149,5 +150,66 @@ class Matrix4(
      */
     fun invert() {
         setInverse(this)
+    }
+
+    /**
+     * Sets this matrix to be the rotation matrix corresponding to
+     * the given quaternion.
+     */
+    fun setOrientation(quaternion: Quaternion, position: Vector) {
+        data[0] = 1 - (2 * quaternion.j * quaternion.j + 2 * quaternion.k * quaternion.k)
+        data[1] = 2 * quaternion.i * quaternion.j + 2 * quaternion.k * quaternion.r
+        data[2] = 2 * quaternion.i * quaternion.k - 2 * quaternion.j * quaternion.r
+        data[3] = position.x
+
+        data[4] = 2 * quaternion.i * quaternion.j - 2 * quaternion.k * quaternion.r
+        data[5] = 1 - (2 * quaternion.i * quaternion.i + 2 * quaternion.k * quaternion.k)
+        data[6] = 2 * quaternion.j * quaternion.k + quaternion.i * quaternion.r
+        data[7] = position.y
+
+        data[8] = 2 * quaternion.i * quaternion.k + 2 * quaternion.j * quaternion.r
+        data[9] = 2 * quaternion.j * quaternion.k - 2 * quaternion.i * quaternion.r
+        data[10] = 1 - (2 * quaternion.i * quaternion.i + 2 * quaternion.j * quaternion.j)
+        data[11] = position.z
+    }
+
+    /**
+     * Transform the given  vector by the transformational inverse
+     * of  this matrix.
+     */
+    fun transformInverse(vector: Vector): Vector {
+        val tmp = vector
+        tmp.x -= data[3]
+        tmp.y -= data[7]
+        tmp.z -= data[11]
+
+        return Vector(
+            x = tmp.x * data[0] + tmp.y * data[4] + tmp.z * data[8],
+            y = tmp.x * data[1] + tmp.y * data[5] + tmp.z * data[9],
+            z = tmp.x * data[2] + tmp.y * data[6] + tmp.z * data[10]
+        )
+    }
+
+    /**
+     * Transform  the given  direction  vector by this matrix.
+     */
+    fun transformDirection(vector: Vector): Vector {
+        return Vector(
+            x = vector.x * data[0] + vector.y * data[1] + vector.z * data[2],
+            y = vector.x * data[4] + vector.y * data[5] + vector.z * data[6],
+            z = vector.x * data[8] + vector.y * data[9] + vector.z * data[10]
+        )
+    }
+
+    /**
+     * Transform the given direction vector by the
+     * transformational inverse of this matrix.
+     */
+    fun transformInversionDirection(vector: Vector): Vector {
+        return Vector(
+            x = vector.x * data[0] + vector.y * data[4] + vector.z * data[8],
+            y = vector.x * data[1] + vector.y * data[5] + vector.z * data[9],
+            z = vector.x * data[2] + vector.y * data[6] + vector.z * data[10]
+        )
     }
 }
