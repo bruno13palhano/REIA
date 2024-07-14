@@ -4,6 +4,7 @@ import com.bruno13palhano.physica_engine.Quaternion
 import com.bruno13palhano.physica_engine.Vector
 import com.bruno13palhano.physica_engine.matrix.Matrix3
 import com.bruno13palhano.physica_engine.matrix.Matrix4
+import kotlin.math.pow
 
 /**
  * A rigid body is the basic simulation object in the physics core.
@@ -36,6 +37,13 @@ class RigidBody(
     var rotation: Vector,
 
     /**
+     * Holds the inverse inertia tensor of the body in world
+     * space. The inverse inertia tensor member is specified in
+     * the body's local space.
+     */
+    var inverseInertialTensorWorld: Matrix3,
+
+    /**
      * Holds a transform, matrix for converting body space into world
      * space and vice versa.
      */
@@ -63,7 +71,34 @@ class RigidBody(
      * Holds the accumulated torque to be applied at the next
      * integration step.
      */
-    var torqueAccumulated: Vector
+    var torqueAccumulated: Vector,
+
+    /**
+     * Holds the amount of damping applied to linear
+     * motion. Damping is required to remove energy added
+     * through numerical instability in the integrator.
+     */
+    var linearDamping: Double,
+
+    /**
+     * Holds the amount of damping applied to angular
+     * motion. Damping is required to remove energy added
+     * through numerical instability in the integrator.
+     */
+    var angularDamping: Double,
+
+    /**
+     * Holds the acceleration of the rigid body. This value
+     * can be used to set acceleration due to gravity (its primary
+     * use), or any other constant acceleration.
+     */
+    var acceleration: Vector,
+
+    /**
+     * Holds the linear acceleration of the rigid body, for the
+     * previous frame.
+     */
+    var lastFrameAcceleration: Vector
 ) {
 
     /**
@@ -203,6 +238,42 @@ class RigidBody(
     }
 
     fun integrate(duration: Double) {
+        // Calculate linear acceleration from force inputs.
+        lastFrameAcceleration = acceleration
+        lastFrameAcceleration.addScaledVector(
+            vector = forceAccumulated,
+            scale = inverseMass
+        )
+
+        // Calculate angular acceleration from torque inputs.
+        val angularAcceleration = inverseInertialTensorWorld.transform(vector = torqueAccumulated)
+
+        // Adjust velocities
+        // Update linear velocity from both acceleration and impulse.
+        velocity.addScaledVector(vector = lastFrameAcceleration, scale = duration)
+
+        // Update angular velocity from both acceleration and impulse.
+        rotation.addScaledVector(vector = angularAcceleration, scale = duration)
+
+        // Impose drag.
+        velocity.scalarMultiplication(linearDamping.pow(duration))
+        rotation.scalarMultiplication(angularDamping.pow(duration))
+
+        // Adjust positions
+        // Update linear position.
+        position.addScaledVector(vector = velocity, scale = duration)
+
+        // Update angular position.
+        orientation.addScaledVector(vector = rotation, scale = duration)
+
+        // Impose drag.
+        velocity.scalarMultiplication(linearDamping.pow(duration))
+        rotation.scalarMultiplication(angularDamping.pow(duration))
+
+        // Normalize the orientation, and update the matrices with the new
+        // position and orientation.
+        calculateDerivedData()
+
         // Clear accumulators.
         clearAccumulators()
     }
@@ -257,5 +328,17 @@ class RigidBody(
     fun clearAccumulators() {
         forceAccumulated.clear()
         torqueAccumulated.clear()
+    }
+
+    fun getMass(): Double {
+        return if (inverseMass == 0.0) {
+            Double.MAX_VALUE
+        } else {
+            1 / inverseMass
+        }
+    }
+
+    fun hasFiniteMass(): Boolean {
+        return inverseMass >= 0.0
     }
 }
