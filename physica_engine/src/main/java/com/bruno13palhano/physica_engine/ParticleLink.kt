@@ -11,7 +11,7 @@ abstract class ParticleLink(
      * Holds the pair of particles that are connected by this link.
      */
     var particles: Array<Particle>
-) {
+) : ParticleContactGenerator() {
     /**
      * Fills the given contact object with the contact needed
      * to keep the cable from overextending.

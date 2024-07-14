@@ -44,4 +44,42 @@ class ParticleRod(
 
         return 1
     }
+
+    override fun addContact(contacts: Array<ParticleContact>?, limit: Int): Int {
+        // Find the length of the rod.
+        val currentLength = currentLength()
+
+        // Check if we're over-extended.
+        if (currentLength == lenght) return 0
+
+        // Otherwise return the contact.
+        contacts?.get(0)?.let { contact ->
+            contact.particles[0] = particles[0]
+            contact.particles[1] = particles[1]
+        }
+
+        // Calculate the normal.
+        val normal = particles[1].getParticlePosition()
+            .subtractCopy(vector = particles[0].getParticlePosition())
+        normal.normalize()
+
+        // The contact normal depends on whether we're extending
+        // or compressing.
+        if (currentLength > lenght) {
+            contacts?.get(0)?.let { contact ->
+                contact.contactNormal = normal
+                contact.penetration = currentLength - lenght
+            }
+        } else {
+            contacts?.get(0)?.let { contact ->
+                contact.contactNormal = normal.scalarCopy(value = -1.0)
+                contact.penetration = lenght - currentLength
+            }
+        }
+
+        // Always use zero restitution (no bounciness)
+        contacts?.get(0)?.restitution = 0.0
+
+        return 1
+    }
 }

@@ -35,4 +35,31 @@ class ParticleCable(
 
         return 1
     }
+
+    override fun addContact(contacts: Array<ParticleContact>?, limit: Int): Int {
+        // Find the length of the cable.
+        val length = currentLength()
+
+        // Check if we're over-extended.
+        if (length < maxLength) return 0
+
+        // Otherwise return the contact.
+        contacts?.get(0)?.let { contact ->
+            contact.particles[0] = particles[0]
+            contact.particles[1] = particles[1]
+        }
+
+        // Calculate the normal.
+        val normal = particles[1].getParticlePosition()
+            .subtractCopy(vector = particles[0].getParticlePosition())
+        normal.normalize()
+
+        contacts?.get(0)?.let { contact ->
+            contact.contactNormal = normal
+            contact.penetration = length - maxLength
+            contact.restitution = restitution
+        }
+
+        return 1
+    }
 }
